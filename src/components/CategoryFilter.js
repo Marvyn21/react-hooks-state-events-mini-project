@@ -18,7 +18,7 @@ function CategoryFilter(props) {
       >
         All
       </button>
-      {categories.map((category) => (
+      {categories && categories.map((category) => (
         <button
           key={category}
           className={selectedCategory === category ? "selected" : ""}
@@ -32,3 +32,4 @@ function CategoryFilter(props) {
 }
 
 export default CategoryFilter;
+

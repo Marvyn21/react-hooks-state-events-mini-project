@@ -3,12 +3,13 @@ import React, { useState } from "react";
 function NewTaskForm(props) {
   const { categories, onTaskFormSubmit } = props;
   const [text, setText] = useState("");
-  const [category, setCategory] = useState(categories[0]);
+  const [category, setCategory] = useState(categories && categories.length ? categories[0] : "");
 
   function handleSubmit(e) {
     e.preventDefault();
     onTaskFormSubmit({ text, category });
     setText("");
+    setCategory("Code")
   }
 
   function handleTextChange(e){
@@ -19,13 +20,12 @@ function NewTaskForm(props) {
     setCategory(e.target.value);
   }
 
-  const categoryOptions = categories.filter(category => category !== "All").map(category => (
+  const categoryOptions = categories && categories.filter(category => category !== "All").map(category => (
     <option key={category} value={category}>{category}</option>
   ));
 
-
   return (
-    <form className="new-task-form">
+    <form className="new-task-form" onSubmit={handleSubmit}>
       <label>
         Details
         <input type="text" name="text" value={text} onChange={handleTextChange} />
